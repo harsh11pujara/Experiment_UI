@@ -17,18 +17,21 @@ class Charts extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: Container(height: 300, width: 400, child: SfCartesianChart(
+      body: SizedBox(height: 300, width: 400, child: SfCartesianChart(
 
         series: <ChartSeries>[
           StackedLineSeries<ChartData, num>(
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.year,
-              yValueMapper: (ChartData data, _) => data.sales
+              yValueMapper: (ChartData data, _) => data.sales,
+            markerSettings: const MarkerSettings(isVisible: true),
+            color: Colors.pink[200]
           ),
 
         ],
-        primaryXAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift),
-        primaryYAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift),
+
+        primaryXAxis: NumericAxis(majorGridLines: const MajorGridLines(width: 0),isVisible: true, axisLine: const AxisLine(width: 0),edgeLabelPlacement: EdgeLabelPlacement.shift),
+        primaryYAxis: NumericAxis(majorTickLines: const MajorTickLines(width: 0),isVisible: true, axisLine: const AxisLine(width: 0), edgeLabelPlacement: EdgeLabelPlacement.shift),
       ),),
     );
   }
