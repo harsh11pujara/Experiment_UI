@@ -22,9 +22,12 @@ class SwipeDelete extends StatelessWidget {
       body: ValueListenableBuilder<List<String>>(
         valueListenable: dataList,
         builder: (context, listValue, child) {
+          List<String> tempList = listValue;
+
           return ListView.builder(
-            itemCount: listValue.length,
+            itemCount: tempList.length,
             itemBuilder: (context, index) {
+
               return Dismissible(
                   key: UniqueKey(),
                   direction: DismissDirection.startToEnd,
@@ -61,54 +64,12 @@ class SwipeDelete extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         decoration: BoxDecoration(color: Colors.orange[200]),
-                        child: Align(alignment: Alignment.centerLeft, child: Text(listValue[index])),
+                        child: Align(alignment: Alignment.centerLeft, child: Text(tempList[index])),
                       )));
             },
           );
         },
       ),
-      // body: ListView.builder(
-      //   itemCount: dataList.length,
-      //   itemBuilder: (context, index) {
-      //     return Dismissible(
-      //         key: UniqueKey(),
-      //         direction: DismissDirection.startToEnd,
-      //         secondaryBackground: IconButton(
-      //           onPressed: () {},
-      //           icon: const Icon(
-      //             Icons.check_box_sharp,
-      //             color: Colors.green,
-      //           ),
-      //         ),
-      //         movementDuration: Duration(milliseconds: 300),
-      //         onDismissed: (direction) {
-      //           dataList.remove(dataList[index]);
-      //           setState(() {});
-      //         },
-      //         background: Align(
-      //           alignment: Alignment.centerLeft,
-      //           child: Container(
-      //             margin: EdgeInsets.only(left: 25),
-      //             child: IconButton(
-      //               onPressed: () {},
-      //               icon: const Icon(
-      //                 Icons.delete,
-      //                 color: Colors.red,
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //         child: Container(
-      //             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      //             child: Container(
-      //               padding: const EdgeInsets.symmetric(horizontal: 20),
-      //               width: double.infinity,
-      //               height: 50,
-      //               decoration: BoxDecoration(color: Colors.orange[200]),
-      //               child: Align( alignment:  Alignment.centerLeft,child: Text(dataList[index])),
-      //             )));
-      //   },
-      // ),
     );
   }
 }
