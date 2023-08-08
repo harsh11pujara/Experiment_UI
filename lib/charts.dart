@@ -2,7 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Charts extends StatelessWidget {
-  const Charts({Key? key}) : super(key: key);
+  Charts({Key? key}) : super(key: key);
+  final TooltipBehavior _tooltipBehavior = TooltipBehavior(
+    enable: true,
+    color: Colors.pink[200],
+    builder: (data, point, series, pointIndex, seriesIndex) {
+      print("${point.x} ${point.y}");
+      return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Text(
+            "${point.y}",
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+          ));
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -17,22 +30,33 @@ class Charts extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: SizedBox(height: 300, width: 400, child: SfCartesianChart(
-
-        series: <ChartSeries>[
-          StackedLineSeries<ChartData, num>(
+      body: SizedBox(
+        height: 300,
+        width: 400,
+        child: SfCartesianChart(
+          tooltipBehavior: _tooltipBehavior,
+          series: <ChartSeries>[
+            StackedLineSeries<ChartData, num>(
               dataSource: chartData,
               xValueMapper: (ChartData data, _) => data.year,
               yValueMapper: (ChartData data, _) => data.sales,
-            markerSettings: const MarkerSettings(isVisible: true),
-            color: Colors.pink[200]
-          ),
-
-        ],
-
-        primaryXAxis: NumericAxis(majorGridLines: const MajorGridLines(width: 0),isVisible: true, axisLine: const AxisLine(width: 0),edgeLabelPlacement: EdgeLabelPlacement.shift),
-        primaryYAxis: NumericAxis(majorTickLines: const MajorTickLines(width: 0),isVisible: true, axisLine: const AxisLine(width: 0), edgeLabelPlacement: EdgeLabelPlacement.shift),
-      ),),
+              markerSettings: const MarkerSettings(isVisible: true),
+              color: Colors.pink[200],
+              enableTooltip: true,
+            ),
+          ],
+          primaryXAxis: NumericAxis(
+              majorGridLines: const MajorGridLines(width: 0),
+              isVisible: true,
+              axisLine: const AxisLine(width: 0),
+              edgeLabelPlacement: EdgeLabelPlacement.shift),
+          primaryYAxis: NumericAxis(
+              majorTickLines: const MajorTickLines(width: 0),
+              isVisible: true,
+              axisLine: const AxisLine(width: 0),
+              edgeLabelPlacement: EdgeLabelPlacement.shift),
+        ),
+      ),
     );
   }
 }
