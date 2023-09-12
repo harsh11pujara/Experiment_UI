@@ -5,7 +5,7 @@ import 'package:experiment_ui/swipe_delete.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: HeatMapCalender(),));
+  runApp(MaterialApp(home: Charts(),));
 }
 
 

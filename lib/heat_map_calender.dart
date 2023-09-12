@@ -22,7 +22,8 @@ class _HeatMapCalenderState extends State<HeatMapCalender> {
             HeatMap(
               startDate: DateTime(2023, 9, 1),
               endDate: DateTime(2023, 9, 30),
-              size: 40,
+fontSize: 6,
+              size: 20,
               showColorTip: false,
               datasets: {
                 DateTime(2023, 9, 6): 3,
@@ -47,26 +48,45 @@ class _HeatMapCalenderState extends State<HeatMapCalender> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.toString())));
               },
             ),
+            /// Linear heat map like view
+            // Container(
+            //   height: 10,
+            //   width: 400,
+            //   color: Colors.yellow[200],
+            //   child: ListView.builder(shrinkWrap: true, scrollDirection: Axis.horizontal,itemCount: 31,itemBuilder: (context, index) {
+            //     return Container(
+            //       height: 15,
+            //       width: 15,
+            //       decoration: BoxDecoration(
+            //         color: Colors.blue[200],
+            //         borderRadius: BorderRadius.circular(1)
+            //       ),
+            //       child: Center(child: Text(index.toString(), style: TextStyle(fontSize: 8,fontWeight: FontWeight.w700),)),
+            //     );
+            //   },),
+            // ),
+
             SizedBox(
               height: 150,
               child: FixedTimeline.tileBuilder(
 
                   direction: Axis.horizontal,
                   builder: TimelineTileBuilder.connected(
-
                     itemCount: 3,
-
                     indicatorBuilder: (context, index) {
                       return DotIndicator(
+                        color: Colors.white,
                         size: 20,
                         child: Text("${index + 1}"),
                       );
                     },
-
                     connectorBuilder: (context, index, type) {
                       return const SolidLineConnector(
+                        color: Colors.white,
                         direction: Axis.horizontal,
                         space: 20,
+                        indent: 15,
+                        endIndent: 15,
                       );
                     },
                   )),

@@ -18,7 +18,8 @@ class _CreatePdfState extends State<CreatePdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PdfPreview(allowSharing: true,build: (format) => createPdf(),),
+      body: PdfPreview(build: (format) => createPdf(),),
+      // body: PdfPreview(pdfFileName: "Trial PDF",build: (format) => createPdf(),),
     );
   }
 
